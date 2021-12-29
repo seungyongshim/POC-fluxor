@@ -1,4 +1,5 @@
 global using Fluxor;
+global using System.Net.Http.Json;
 using BlazorApp1.Client;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;

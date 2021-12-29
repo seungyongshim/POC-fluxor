@@ -6,10 +6,10 @@ namespace BlazorApp1.Client.Pages;
 public partial class Counter
 {
     [Inject]
-    IState<CounterState> CounterState { get; set; }
+    private IState<CounterState> CounterState { get; set; }
 
     [Inject]
-    public IDispatcher Dispatcher { get; set; }
+    private IDispatcher Dispatcher { get; set; }
 
     private void IncrementCounterAction() =>
         Dispatcher.Dispatch(new IncrementCounterAction());

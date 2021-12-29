@@ -1,6 +1,6 @@
 namespace BlazorApp1.Client.Store.CounterUseCase;
 
-public static class Reducers
+public static class CounterReducers
 {
     [ReducerMethod]
     public static CounterState ReduceIncrementCounterAction(CounterState state, IncrementCounterAction action) =>
