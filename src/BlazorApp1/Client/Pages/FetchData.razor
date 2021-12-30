@@ -8,7 +8,7 @@
 
 <h1>Weather forecast</h1>
 
-<button class="btn btn-danger" @onclick="ShowDeleteModal" disabled="@(!WeatherState.Value.CheckedIds.Any())">삭제</button>
+<button class="btn btn-danger align-right" @onclick="ShowDeleteModal" disabled="@(!WeatherState.Value.CheckedIds.Any())">삭제</button>
 
 @if (WeatherState.Value.IsLoading)
 {
@@ -41,6 +41,9 @@ else
             }
         </tbody>
     </table>
+    <p><HxPager CurrentPageIndex="0" TotalPages="10" /></p>
+    
 }
+
 
 

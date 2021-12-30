@@ -33,8 +33,7 @@ public partial class FetchData
 
     private async Task ShowDeleteModal()
     {
-        var ret = await MessageBox.ConfirmAsync("확인",
-                                                $"{WeatherState.Value.CheckedIds.Count()}개 항목을 삭제하시겠습니까?");
+        var ret = await MessageBox.ConfirmAsync($"{WeatherState.Value.CheckedIds.Count()}개 항목을 삭제하시겠습니까?");
 
         if (ret)
         {
