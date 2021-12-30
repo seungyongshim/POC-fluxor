@@ -8,9 +8,12 @@ public record WeatherState(bool IsLoading,
                            IEnumerable<int> CheckedIds)
 {
     private WeatherState() : this(true, null, Array.Empty<int>()) { }
+}
 
-    public IEnumerable<(bool Checked, WeatherForecastDto Dto)> TableView =>
-        Forecasts.Select(x => (CheckedIds.Any(b => b == x.Id), x));
+public static class WeatherStateExtensions
+{
+    public static IEnumerable<(bool Checked, WeatherForecastDto Dto)> TableView (this WeatherState @this) =>
+       @this.Forecasts.Select(x => (@this.CheckedIds.Any(b => b == x.Id), x));
 }
 
 public record FetchDataAction;

@@ -1,5 +1,6 @@
 @page "/fetchdata"
 @using BlazorApp1.Shared
+@using BlazorApp1.Client.Store.WeatherUseCase
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 @inject HttpClient Http
 
@@ -7,7 +8,7 @@
 
 <h1>Weather forecast</h1>
 
-<button class="btn btn-danger" @onclick="Delete">삭제</button>
+<button class="btn btn-danger" @onclick="ShowDeleteModal" disabled="@(!WeatherState.Value.CheckedIds.Any())">삭제</button>
 
 @if (WeatherState.Value.IsLoading)
 {
@@ -26,7 +27,7 @@ else
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in WeatherState.Value.TableView)
+            @foreach (var item in WeatherState.Value.TableView())
             {
                 <tr>
                     <td>
