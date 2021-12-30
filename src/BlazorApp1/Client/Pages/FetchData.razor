@@ -1,6 +1,7 @@
 @page "/fetchdata"
 @using BlazorApp1.Shared
 @using BlazorApp1.Client.Store.WeatherUseCase
+
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 @inject HttpClient Http
 
@@ -10,6 +11,7 @@
 
 <button class="btn btn-danger my-2" @onclick="ShowDeleteModal" disabled="@(!WeatherState.Value.CheckedIds.Any())">삭제</button>
 
+<!-- https://www.htmlelements.com/blazor/blazor-ui/demos/blazor-table?id=basic -->
 
 @if (WeatherState.Value.IsLoading)
 {
@@ -17,33 +19,12 @@
 }
 else
 {
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in WeatherState.Value.TableView())
-            {
-                <tr>
-                    <td>
-                        <input type="checkbox" checked="@item.Checked" @onchange="e => Check(e, item.Dto.Id)" />
-                    </td>
-                    <td>@item.Dto.Date.ToShortDateString()</td>
-                    <td>@item.Dto.TemperatureC</td>
-                    <td>@item.Dto.TemperatureF</td>
-                    <td>@item.Dto.Summary</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-    <p><HxPager CurrentPageIndex="0" TotalPages="10" /></p>
-    
+    <Table Selection="true" class="table" Paging="true"
+           DataSource="WeatherState.Value.Forecasts"
+           @ref = "TableWeather"
+           @OnCellClick="e => Check(TableWeather.Selected)">
+
+    </Table>
 }
 
 

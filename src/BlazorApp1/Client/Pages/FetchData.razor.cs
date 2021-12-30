@@ -2,11 +2,14 @@ using BlazorApp1.Client.Store.WeatherUseCase;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
 using Microsoft.AspNetCore.Components;
+using Smart.Blazor;
 
 namespace BlazorApp1.Client.Pages;
 
 public partial class FetchData
 {
+    Table TableWeather { get; set; }
+
     [Inject]
     private IState<WeatherState> WeatherState { get; set; }
 
@@ -22,13 +25,8 @@ public partial class FetchData
         Dispatcher.Dispatch(new FetchDataAction());
     }
 
-    private void Check(ChangeEventArgs e, int id)
+    private void Check(IEnumerable<object> checkedObjects)
     {
-        if (e.Value is bool @checked)
-        {
-            Dispatcher.Dispatch(@checked ? new CheckedAction(id)
-                                         : new UncheckedAction(id));
-        }
     }
 
     private async Task ShowDeleteModal()
