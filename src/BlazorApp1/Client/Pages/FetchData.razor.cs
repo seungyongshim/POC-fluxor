@@ -16,4 +16,18 @@ public partial class FetchData
         base.OnInitialized();
         Dispatcher.Dispatch(new FetchDataAction());
     }
+
+    private void Check(ChangeEventArgs e, int id)
+    {
+        if (e.Value is bool @checked)
+        {
+            Dispatcher.Dispatch(@checked ? new CheckedAction(id)
+                                         : new UncheckedAction(id));
+        }
+    }
+
+    private void Delete()
+    {
+        Dispatcher.Dispatch(new DeleteDataAction());
+    }
 }

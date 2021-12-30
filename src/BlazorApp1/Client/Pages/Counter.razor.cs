@@ -13,4 +13,6 @@ public partial class Counter
 
     private void IncrementCounterAction() =>
         Dispatcher.Dispatch(new IncrementCounterAction());
+
+    
 }
