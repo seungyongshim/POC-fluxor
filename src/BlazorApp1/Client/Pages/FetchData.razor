@@ -15,31 +15,27 @@
 }
 else
 {
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1"><input type="checkbox"/></div>
+                <div class="col">Date</div>
+                <div class="col">Temp. (C)</div>
+                <div class="col">Temp. (F)</div>
+                <div class="col">Summary</div>
+        </div>
             @foreach (var item in WeatherState.Value.TableView())
             {
-                <tr>
-                    <td>
+                <div class="row">
+                    <div class="col-1">
                         <input type="checkbox" checked="@item.Checked" @onchange="e => Check(e, item.Dto.Id)" />
-                    </td>
-                    <td>@item.Dto.Date.ToShortDateString()</td>
-                    <td>@item.Dto.TemperatureC</td>
-                    <td>@item.Dto.TemperatureF</td>
-                    <td>@item.Dto.Summary</td>
-                </tr>
+                    </div>
+                    <div class="col">@item.Dto.Date.ToShortDateString()</div>
+                    <div class="col">@item.Dto.TemperatureC</div>
+                    <div class="col">@item.Dto.TemperatureF</div>
+                    <div class="col">@item.Dto.Summary</div>
+                </div>
             }
-        </tbody>
-    </table>
+    </div>
     <div class="d-flex justify-content-between">
                 <HxDropdown >
                         <HxDropdownToggleButton Color="ThemeColor.Primary" Outline="true">10개씩 보기</HxDropdownToggleButton>
