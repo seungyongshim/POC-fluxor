@@ -9,8 +9,6 @@
 <h1>Weather forecast</h1>
 
 <button class="btn btn-danger my-2" @onclick="ShowDeleteModal" disabled="@(!WeatherState.Value.CheckedIds.Any())">삭제</button>
-
-
 @if (WeatherState.Value.IsLoading)
 {
     <p><em>Loading...</em></p>
@@ -42,8 +40,17 @@ else
             }
         </tbody>
     </table>
-    <p><HxPager CurrentPageIndex="0" TotalPages="10" /></p>
-    
+    <div class="d-flex justify-content-between">
+                <HxDropdown >
+                        <HxDropdownToggleButton Color="ThemeColor.Primary" Outline="true">10개씩 보기</HxDropdownToggleButton>
+	                    <HxDropdownMenu>
+		                    <HxDropdownItem >10개씩 보기</HxDropdownItem>
+		                    <HxDropdownItem >30개씩 보기 </HxDropdownItem>
+                            <HxDropdownItem >50개씩 보기 </HxDropdownItem>
+	                    </HxDropdownMenu>
+                </HxDropdown>
+                <HxPager CurrentPageIndex="0" TotalPages="10" />
+    </div>
 }
 
 
