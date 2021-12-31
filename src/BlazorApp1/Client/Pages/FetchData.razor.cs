@@ -25,7 +25,7 @@ public partial class FetchData
     private void CheckAll() =>
         Dispatcher.Dispatch(WeatherState.Value.CheckedIds.Count() switch
         {
-            1 => new UncheckedAllAction(),
+            var c when c == WeatherState.Value.Forecasts.Count() => new UncheckedAllAction(),
             _ => new CheckedAllAction()
         });
 
