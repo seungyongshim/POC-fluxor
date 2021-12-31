@@ -15,23 +15,25 @@
 }
 else
 {
-    <table class="table table-bordered">
-        <thead>
+    <table class="table table-bordered table-hover">
+        <thead class="table-light">
             <tr>
-                <th></th>
-                <th>Date</th>
-                <th>Temp. (C)</th>
-                <th>Temp. (F)</th>
-                <th>Summary</th>
+                <th class="" scope="col"><input class="form-check-input" type="checkbox" /></th>
+                <th scope="col">법인</th>
+                <th scope="col">부서</th>
+                <th scope="col">이름</th>
+                <th scope="col">이메일</th>
+                <th scope="col">사용목적</th>
+                <th scope="col">사용기간</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in WeatherState.Value.TableView())
             {
                 <tr>
-                    <td>
-                        <input type="checkbox" checked="@item.Checked" @onchange="e => Check(e, item.Dto.Id)" />
-                    </td>
+                    <th class="" scope="row">
+                        <input class="form-check-input" type="checkbox" checked="@item.Checked" @onchange="e => Check(e, item.Dto.Id)" />
+                    </th>
                     <td>@item.Dto.Date.ToShortDateString()</td>
                     <td>@item.Dto.TemperatureC</td>
                     <td>@item.Dto.TemperatureF</td>
@@ -49,7 +51,7 @@ else
                             <HxDropdownItem >50개씩 보기 </HxDropdownItem>
 	                    </HxDropdownMenu>
                 </HxDropdown>
-                <HxPager CurrentPageIndex="0" TotalPages="10" />
+                <HxPager CurrentPageIndex="0" TotalPages="50" />
     </div>
 }
 
