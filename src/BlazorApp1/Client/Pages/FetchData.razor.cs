@@ -22,6 +22,16 @@ public partial class FetchData
         Dispatcher.Dispatch(new FetchDataAction());
     }
 
+    private void CheckAll() =>
+        Dispatcher.Dispatch(WeatherState.Value.CheckedIds.Count() switch
+        {
+            1 => new UncheckedAllAction(),
+            _ => new CheckedAllAction()
+        });
+
+    record CheckedAllAction;
+    record UncheckedAllAction;
+
     private void Check(ChangeEventArgs e, int id)
     {
         if (e.Value is bool @checked)
