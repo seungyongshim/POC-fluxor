@@ -7,8 +7,21 @@
 <PageTitle>Weather forecast</PageTitle>
 
 <h1>Weather forecast</h1>
-
-<button class="btn btn-danger my-2" @onclick="ShowDeleteModal" disabled="@(!WeatherState.Value.CheckedIds.Any())">삭제</button>
+<div class="container-fluid p-0 m-0 my-3">
+    <div class="row p-0 m-0">
+        <div class="col-auto me-auto p-0 m-0">
+            <div class="input-group ">
+              <input type="text" class="form-control" placeholder="Search" title="Enter search keyword">
+              <button class="btn btn-outline-secondary " type="button"><i class="bi bi-search"></i></button>
+            </div>
+        </div>
+        <div class="col-auto p-0 m-0">
+            <HxButton Color="ThemeColor.Primary">추가</HxButton>
+            <HxButton Color="ThemeColor.Primary">편집</HxButton>
+            <button class="btn btn-danger " @onclick="ShowDeleteModal" disabled="@(!WeatherState.Value.CheckedIds.Any())">삭제</button>
+        </div>
+    </div>
+</div>
 @if (WeatherState.Value.IsLoading)
 {
     <p><em>Loading...</em></p>
@@ -43,7 +56,7 @@ else
         </tbody>
     </table>
     <div class="d-flex justify-content-between">
-                <HxDropdown >
+                <HxDropdown>
                         <HxDropdownToggleButton Color="ThemeColor.Primary" Outline="true">10개씩 보기</HxDropdownToggleButton>
 	                    <HxDropdownMenu>
 		                    <HxDropdownItem >10개씩 보기</HxDropdownItem>
@@ -51,7 +64,7 @@ else
                             <HxDropdownItem >50개씩 보기 </HxDropdownItem>
 	                    </HxDropdownMenu>
                 </HxDropdown>
-                <HxPager CurrentPageIndex="0" TotalPages="50" />
+                <HxPager DisplayNumberCount=5 CurrentPageIndex="0"  TotalPages="50" />
     </div>
 }
 
