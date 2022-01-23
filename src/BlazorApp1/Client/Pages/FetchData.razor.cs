@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations;
 using BlazorApp1.Client.Store.WeatherUseCase;
+using BlazorApp1.Shared;
 using Havit.Blazor.Components.Web;
 using Havit.Blazor.Components.Web.Bootstrap;
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Forms;
 
 namespace BlazorApp1.Client.Pages;
 
@@ -50,4 +53,31 @@ public partial class FetchData
             Dispatcher.Dispatch(new DeleteDataAction());
         }
     }
+
+    private HxModal InsertModal { get; set; }
+    private EditForm InsertForm;
+    private InsertModel InsertModel;
+    private HxSubmit InsertModalSubmit;
+
+    private async Task ShowInsertModal()
+    {
+        InsertModel = new InsertModel();
+        await InsertModal.ShowAsync();
+    }
+}
+
+class InsertModel
+{
+    [Required(ErrorMessage = "법인은 필수입니다.")]
+    public string Company { get; set; }
+
+    [Required(ErrorMessage = "이름은 필수입니다.")]
+    public string Name { get; set; }
+
+    [Required(ErrorMessage = "부서명은 필수입니다.")]
+    public string Department { get; set; }
+
+    [Required(ErrorMessage = "이메일은 필수입니다.")]
+    public string Email { get; set; }
+    public DateTime Date { get; set; }
 }

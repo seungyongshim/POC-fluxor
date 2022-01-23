@@ -5,19 +5,25 @@
 @inherits Fluxor.Blazor.Web.Components.FluxorComponent
 @inject HttpClient Http
 
-<h1>Weather forecast</h1>
-<div class="container-fluid p-0 m-0 my-2">
+<h2>사용자 관리</h2>
+<div class="container-fluid p-0 m-0 my-1">
     <div class="row p-0 m-0">
         <div class="col-auto me-auto p-0 m-0 my-1">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search" title="Enter search keyword">
+              <input type="text" class="form-control" placeholder="검색" title="Enter search keyword">
               <RippleButton class="btn btn-outline-secondary"><HxIcon Icon="BootstrapIcon.Search"/></RippleButton> 
             </div>
         </div>
         <div class="col-auto p-0 m-0 my-1">
-            <c><RippleButton class="btn btn-primary"><HxIcon Icon="BootstrapIcon.PlusLg"/>추가</RippleButton></c>
-            <HxButton Icon="BootstrapIcon.Pencil" Color="ThemeColor.Success">편집</HxButton>
-            <HxButton Icon="BootstrapIcon.Trash" @onclick="ShowDeleteModal" Enabled="@(WeatherState.Value.CheckedIds.Any())" Color="ThemeColor.Danger">삭제</HxButton>
+            <RippleButton class="btn btn-primary" @onclick="ShowInsertModal"><HxIcon Icon="BootstrapIcon.PlusLg"/>&nbsp;추가</RippleButton>
+            <RippleButton class="btn btn-success"><HxIcon Icon="BootstrapIcon.Pencil"/>&nbsp;편집</RippleButton>
+            <RippleWrapper Enabled="@(WeatherState.Value.CheckedIds.Any())">
+                <HxButton Icon="BootstrapIcon.Trash"
+                          @onclick="ShowDeleteModal"
+                          Enabled="@(WeatherState.Value.CheckedIds.Any())"
+                          Color="ThemeColor.Danger"
+                          OnClickStopPropagation = "false">삭제</HxButton>
+            </RippleWrapper>
         </div>
     </div>
 </div>
@@ -30,7 +36,7 @@ else
     <table class="table table-bordered table-hover">
         <thead class="table-light">
             <tr>
-                <th class="" scope="col">
+                <th style="width:2px" class="" scope="col">
                     <input class="form-check-input"
                            type="checkbox"
                            checked="@(WeatherState.Value.CheckedIds.Count() == WeatherState.Value.Forecasts.Count())"
@@ -58,29 +64,56 @@ else
                     <td>@item.Dto.TemperatureC</td>
                     <td>@item.Dto.TemperatureF</td>
                     <td>@item.Dto.Summary</td>
+                    <td>@item.Dto.Summary</td>
+                    <td>@item.Dto.Summary</td>
                 </tr>
             }
         </tbody>
     </table>
     <div class="d-flex justify-content-between">
-        <div class="dropdown">
-            <div type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                <RippleButton class="btn btn-outline-primary dropdown-toggle" >
-                   10개씩 보기
-                </RippleButton>
-            </div>
-          <ul class="dropdown-menu" >
-            <li><a class="dropdown-item" href="#">10개씩 보기</a></li>
-            <li><a class="dropdown-item" href="#">30개씩 보기</a></li>
-            <li><a class="dropdown-item" href="#">50개씩 보기</a></li>
-          </ul>
+        <div>
+            <RippleWrapper Color="#0d6efd">
+                <select class="form-select">
+                    <option value="1">10개씩 보기</option>
+                    <option value="2">30개씩 보기</option>
+                    <option value="3">50개씩 보기</option>
+                </select>
+            </RippleWrapper>
         </div>
-
         <HxPager DisplayNumberCount=5
                  CurrentPageIndex=0
                  TotalPages=50 />
     </div>
 }
 
+<HxModal Size="ModalSize.ExtraLarge"
+         @ref="InsertModal"
+         Title="신규 유저 등록"
+         OnClosed=@(e => @InsertModel=null)>
+	<BodyTemplate>
+		<EditForm @ref=@InsertForm Model=@InsertModel>
+        	<DataAnnotationsValidator />
+            <HxInputText LabelType="LabelType.Floating"  Label="법인"
+                         @bind-Value="@InsertModel.Company"/>
 
+            <HxInputText LabelType="LabelType.Floating"  Label="부서"
+                         @bind-Value="@InsertModel.Department"/>
+
+            <HxInputText LabelType="LabelType.Floating"  Label="이름"
+                         @bind-Value="@InsertModel.Name" />
+
+            <HxInputText LabelType="LabelType.Floating" Label="이메일"
+                         @bind-Value="@InsertModel.Email" />
+        </EditForm>
+	</BodyTemplate>
+	<FooterTemplate>
+        <HxButton Text="취소" OnClick="@(e => InsertModal.HideAsync())" Color="ThemeColor.Secondary" />
+    <RippleWrapper>
+        <HxButton OnClick="@(e => InsertForm.EditContext.Validate())"
+                  Color="ThemeColor.Primary" 
+                  Text="승인"
+                  OnClickStopPropagation=false/>
+    </RippleWrapper>
+	</FooterTemplate>
+</HxModal>
 

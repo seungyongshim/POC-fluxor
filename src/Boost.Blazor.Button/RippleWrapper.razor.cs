@@ -5,20 +5,31 @@ namespace Boost.Blazor.Button
 {
     public partial class RippleWrapper
     {
-            [Parameter]
-            public RenderFragment ChildContent { get; set; }
+        [Parameter]
+        public RenderFragment ChildContent { get; set; }
 
-            [Parameter(CaptureUnmatchedValues = true)]
-            public Dictionary<string, object> AdditionalAttributes { get; set; }
+        [Parameter]
+        public bool Enabled { get; set; } = true;
 
-            public MarkupString RippleMarkup { get; set; }
+        [Parameter(CaptureUnmatchedValues = true)]
+        public Dictionary<string, object> AdditionalAttributes { get; set; }
 
-            private void OnClick(MouseEventArgs mouseEventArgs)
+        public MarkupString RippleMarkup { get; set; }
+
+        [Parameter]
+        public string Color { get; set; } = "#fff";
+
+        private void OnClick(MouseEventArgs mouseEventArgs)
+        {
+            if (Enabled is not true)
             {
-                var guid = Guid.NewGuid().ToString();
-                var x = mouseEventArgs.OffsetX;
-                var y = mouseEventArgs.OffsetY;
-                RippleMarkup = (MarkupString)@$"<div {guid} class=""ripple"" style=""top:{y}px;left:{x}px"" ripplewrapper1/>";
+                return;
             }
+
+            var guid = Guid.NewGuid().ToString();
+            var x = mouseEventArgs.OffsetX;
+            var y = mouseEventArgs.OffsetY;
+            RippleMarkup = (MarkupString)@$"<div {guid} class=""ripple"" style=""top:{y}px;left:{x}px;background:{Color}"" ripplewrapper1/>";
+        }
     }
 }
