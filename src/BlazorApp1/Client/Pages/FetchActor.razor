@@ -14,7 +14,9 @@
             </div>
         </div>
         <div class="col-auto p-0 m-0 my-1">
+                            <RippleWrapper>
             <HxButton Icon="BootstrapIcon.PlusLg" CssClass="rp1" Color="ThemeColor.Primary">추가</HxButton>
+                            </RippleWrapper>
             <HxButton Icon="BootstrapIcon.Pencil" Color="ThemeColor.Success">편집</HxButton>
             <HxButton Icon="BootstrapIcon.Trash" @onclick="ShowDeleteModal" Enabled="@(WeatherState.Value.CheckedIds.Any())" Color="ThemeColor.Danger">삭제</HxButton>
         </div>
@@ -63,7 +65,9 @@ else
     </table>
     <div class="d-flex justify-content-between">
         <HxDropdown>
-                <HxDropdownToggleButton Color="ThemeColor.Primary" Outline="true">10개씩 보기</HxDropdownToggleButton>
+
+                    <HxDropdownToggleButton Color="ThemeColor.Primary" Outline="true">10개씩 보기</HxDropdownToggleButton>
+
 	            <HxDropdownMenu>
 		            <HxDropdownItem >10개씩 보기</HxDropdownItem>
 		            <HxDropdownItem >30개씩 보기 </HxDropdownItem>

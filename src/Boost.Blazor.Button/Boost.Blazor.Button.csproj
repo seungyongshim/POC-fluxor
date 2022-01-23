@@ -12,7 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="RippleWrapper.razor.css">
+      <CssScope>btn-ripple</CssScope>
+    </None>
     <None Update="RippleButton.razor.css" CssScope="btn-ripple" />
+    <None Update="RippleWrapper.razor.css" CssScope="ripplewrapper1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.1" />
   </ItemGroup>
 
