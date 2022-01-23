@@ -22,7 +22,38 @@ label:focus,
   outline: 0px !important;
   -webkit-appearance: none;
   box-shadow: none !important;
+  position: relative;
+  overflow: hidden;
 }
+
+
+.ripple {
+  pointer-events: none;
+  position: absolute;
+  background: #fff;
+  border-radius: 50%;
+  width: 5px;
+  height: 5px;
+  
+  opacity: 0;
+}
+
+.ripple.show {
+  animation: rippleEffect .88s 1;
+}
+
+@keyframes rippleEffect {
+  0% {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+
+  100% {
+    transform: scale(3);
+    opacity: 0;
+  }
+}
+
 
   :root {
     --hx-pager-margin: 0px

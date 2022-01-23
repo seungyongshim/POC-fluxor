@@ -15,8 +15,18 @@ public partial class Counter
     [Inject]
     private IDispatcher Dispatcher { get; set; }
 
+    protected override async Task OnInitializedAsync()
+    {
+        
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender) 
     {
+        if (firstRender)
+        {
+           // JS.InvokeVoidAsync("findButtons");
+        }
+        
         //await JS.InvokeAsync<object>("routeNewPage", null);
         await base.OnAfterRenderAsync(firstRender);
     }

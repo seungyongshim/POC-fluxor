@@ -14,5 +14,5 @@
 <RippleButton class="btn btn-outline-primary" @onclick="IncrementCounterAction">누르세요</RippleButton>
 
 <RippleWrapper>
-    <HxButton Icon="BootstrapIcon.PlusLg" Color="ThemeColor.Primary" @onclick="IncrementCounterAction">추가</HxButton>
+    <HxButton Icon="BootstrapIcon.PlusLg" Color="ThemeColor.Primary" @onclick="IncrementCounterAction" OnClickStopPropagation="false" >추가</HxButton>
 </RippleWrapper>
