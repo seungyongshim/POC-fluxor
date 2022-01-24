@@ -15,9 +15,12 @@ public partial class Counter
     [Inject]
     private IDispatcher Dispatcher { get; set; }
 
+    [Inject]
+    private IJSRuntime JsRuntime { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        
+        await JsRuntime.InvokeAsync<IJSObjectReference>("import", "/Ripple.js");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender) 

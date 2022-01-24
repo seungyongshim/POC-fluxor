@@ -7,10 +7,10 @@
 
 <p role="status">Current count: @CounterState.Value.ClickCount</p>
 
-<RippleWrapper>
+
     <button class="btn btn-primary" @onclick="IncrementCounterAction">Click me</button>
-</RippleWrapper>
+
 <RippleButton class="btn btn-outline-primary" @onclick="IncrementCounterAction">누르세요</RippleButton>
-<RippleWrapper>
+
     <HxButton Icon="BootstrapIcon.PlusLg" Color="ThemeColor.Primary" @onclick="IncrementCounterAction" OnClickStopPropagation="false" >추가</HxButton>
-</RippleWrapper>
+
