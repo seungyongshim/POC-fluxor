@@ -1,24 +1,23 @@
-var i = 0;
+const buttons = document.querySelectorAll('button');
 
-var addRippleEffect = function (press) {
-	var target = press.target;
-	if (target.tagName.toLowerCase() !== 'button') return false;
-	var rect = target.getBoundingClientRect();
-	var ripple = target.querySelector('.ripple');
-	if (!ripple) {
-		ripple = document.createElement('span');
-		ripple.className = 'ripple';
-		ripple.style.height = ripple.style.width = Math.max(press.target.offsetWidth, target.offsetHeight) + 'px';
-		target.appendChild(ripple);
-    }
-	var top = press.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop;
-	var left = press.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft;
-	ripple.style.top = top + 'px';
-	ripple.style.left = left + 'px';
-    ripple.classList.add('show');
-  ripple.tagName= 'rippl' + i++;
-  
-	return false;
-}
+[...buttons].forEach(button => {
+  button.onmousedown = function (e) {
 
-document.addEventListener('click', addRippleEffect, false);
+    const x = e.pageX - this.offsetLeft;
+    const y = e.pageY - this.offsetTop;
+    const w = this.offsetWidth;
+
+    const ripple = document.createElement('span');
+
+    ripple.className = 'ripple';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    ripple.style.setProperty('--scale', w);
+
+    this.appendChild(ripple);
+
+    setTimeout(() => {
+      ripple.parentNode.removeChild(ripple);
+    }, 500);
+  };
+});
