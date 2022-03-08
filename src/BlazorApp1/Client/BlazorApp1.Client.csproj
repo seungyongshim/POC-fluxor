@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Boost.Proto.Actor.BlazorWasm" Version="0.26.0.75" />
     <PackageReference Include="Fluxor.Blazor.Web.ReduxDevTools" Version="5.0.0" />
-    <PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="2.0.3" />
+    <PackageReference Include="Havit.Blazor.Components.Web.Bootstrap" Version="2.2.4" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="6.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="6.0.1" PrivateAssets="all" />
   </ItemGroup>
